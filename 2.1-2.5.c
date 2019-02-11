@@ -26,21 +26,20 @@ void ex02() {	//Exercise 2.2
 	}
 }
 
-int get_int_value(char c) {
-	if (isalpha(c)) {
-		return toupper(c) - 'A' + 10;
-	}
-	return c -'0';
-}
 
 int htoi(char *s) {	//Exercise 2.3
 	int length = strlen(s)-1;
 	int exponent = 1;
 	int decimal = 0;
 	int i;
+	int value;
 
 	for (i = length; i >= 0; --i) {
-		decimal = decimal + get_int_value(s[i]) * exponent;
+		if (isalpha(s[i])) {
+			value = toupper(s[i]) - 'A' + 10;
+		}
+		else { value = s[i] - '0'; }
+		decimal = decimal + value * exponent;
 		exponent = exponent* 16;
 	}
 	printf("%d", decimal);
